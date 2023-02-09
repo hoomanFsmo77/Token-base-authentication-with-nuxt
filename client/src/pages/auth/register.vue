@@ -34,8 +34,15 @@
             </template>
           </div>
           <div>
-            <button class="btn btn-primary">
-              Register
+            <button :disabled="fetchFlag" class="btn btn-primary">
+              <template v-if="fetchFlag">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+              </template>
+              <template v-else>
+                Register
+              </template>
+
             </button>
           </div>
         </form>
@@ -45,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-const {userInformation,registerHandler,errorDebugger}=UseRegister()
+const {userInformation,registerHandler,errorDebugger,fetchFlag}=UseRegister()
 </script>
 
 <style scoped>

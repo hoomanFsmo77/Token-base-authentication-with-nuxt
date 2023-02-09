@@ -1,16 +1,16 @@
 import {setCookie} from "h3";
 
 
-export default defineEventHandler(async (e)=>{
+export default defineEventHandler(async e=>{
     const body=await readBody(e)
     const {baseUrl}=useRuntimeConfig()
     try {
-        const data:any=await $fetch(baseUrl+'/api/register',{
+        const data:{user:object,token:string}=await $fetch(baseUrl+'/api/login',{
             method:'POST',
-            body:body,
             headers:{
                 'Accept':'application/json'
-            }
+            },
+            body:body
         })
         setCookie(e,'token',data.token,{
             httpOnly:true,
@@ -18,8 +18,12 @@ export default defineEventHandler(async (e)=>{
             maxAge:60*60*24*7, // 1 weak
             path:'/'
         })
-        return  data.user;
-    }catch (error:any) {
-        return  error;
+        return data.user;
+
+    }catch (err) {
+        return err;
     }
+
+
+
 })

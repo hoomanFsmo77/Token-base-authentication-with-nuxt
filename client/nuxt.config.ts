@@ -1,7 +1,13 @@
 
 export default defineNuxtConfig({
+    runtimeConfig:{
+      baseUrl:process.env.BASE_URL,
+        public:{
+            baseUrl:process.env.BASE_URL
+        }
+    },
     build:{
-        transpile:[]
+        transpile:['vue-toastification']
     },
     css:['~/assets/style/App.scss'],
     app:{

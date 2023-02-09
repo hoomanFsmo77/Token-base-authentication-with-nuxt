@@ -1,36 +1,33 @@
 import {User_Information,ErrorDebugger} from "~/composables/useTypes";
 import { useToast } from "vue-toastification";
-export const UseRegister=()=>{
+
+export const useLogin=()=>{
     const fetchFlag=ref<boolean>(false)
     const toast = useToast();
+    const userInformation=reactive<User_Information>({
+        password:null,
+        email:null
+    })
     const errorDebugger=reactive<ErrorDebugger>({
         message:null,
         flag:false
     })
-    const userInformation=reactive<User_Information>({
-        name:null,
-        c_password:null,
-        password:null,
-        email:null
-    })
-
-    const registerHandler =async () => {
+    const loginHandler = async () => {
         fetchFlag.value=true
         errorDebugger.flag=false
         errorDebugger.message=null
         try {
-            const data=await $fetch('/api/auth/register',{
+            const data=await $fetch('/api/auth/login',{
                 method:'POST',
                 body:userInformation
             })
-            // console.log(data)
-            toast.success('You registered!')
+            toast.success('You are logged in!')
             errorDebugger.flag=false
             errorDebugger.message=null
             return navigateTo({name:'index'})
-        }catch (e:any) {
+        }catch (err:any) {
             errorDebugger.flag=true
-            errorDebugger.message=e.data.data
+            errorDebugger.message=err.data.data
         }finally {
             fetchFlag.value=false
         }
@@ -38,8 +35,7 @@ export const UseRegister=()=>{
 
 
 
-
     return{
-        userInformation,registerHandler,errorDebugger,fetchFlag
+        loginHandler,userInformation,errorDebugger,fetchFlag
     }
 }
