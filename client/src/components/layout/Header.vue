@@ -11,21 +11,21 @@
             <NuxtLink active-class="active" :to="{name:'index'}" class="nav-link " aria-current="page">Home</NuxtLink>
           </li>
           <li class="nav-item">
-            <NuxtLink :to="{name:'Posts'}" active-class="active" class="nav-link" >Posts</NuxtLink>
+            <NuxtLink :to="{name:'posts'}" active-class="active" class="nav-link" >Posts</NuxtLink>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <NuxtLink active-class="active" :to="{name:'Profile'}" class="nav-link " aria-current="page">Profile</NuxtLink>
+            <NuxtLink active-class="active" :to="{name:'profile'}" class="nav-link " aria-current="page">Profile</NuxtLink>
           </li>
           <li class="nav-item">
-            <NuxtLink active-class="active" :to="{name:'Logout'}" class="nav-link " aria-current="page">Log out</NuxtLink>
+            <NuxtLink active-class="active" :to="{name:'auth-logout'}" class="nav-link " aria-current="page">Log out</NuxtLink>
           </li>
           <li class="nav-item">
-            <NuxtLink active-class="active" :to="{name:'Register'}" class="nav-link " aria-current="page">Register</NuxtLink>
+            <NuxtLink active-class="active" :to="{name:'auth-register'}" class="nav-link " aria-current="page">Register</NuxtLink>
           </li>
           <li class="nav-item">
-            <NuxtLink active-class="active" :to="{name:'Login'}" class="nav-link " aria-current="page">Log in</NuxtLink>
+            <NuxtLink active-class="active" :to="{name:'auth-login'}" class="nav-link " aria-current="page">Log in</NuxtLink>
           </li>
         </ul>
       </div>

@@ -1,0 +1,1 @@
+export {UseRegister} from './auth/useRegister'
