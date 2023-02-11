@@ -1,29 +1,21 @@
-import {setCookie} from "h3";
+import {readBody, setCookie} from "h3";
+import {Login_Response} from "~/composables/useTypes";
 
-
-export default defineEventHandler(async e=>{
+export default defineEventHandler(async e=> {
+    const {endpoints,cookieName}=useRuntimeConfig()
     const body=await readBody(e)
-    const {baseUrl}=useRuntimeConfig()
     try {
-        const data:{user:object,token:string}=await $fetch(baseUrl+'/api/login',{
+        const data:Login_Response=await $fetch(endpoints.login,{
             method:'POST',
-            headers:{
-                'Accept':'application/json'
-            },
-            body:body
+            body
         })
-        setCookie(e,'token',data.token,{
+        setCookie(e,cookieName,data.token,{
             httpOnly:true,
-            secure:true,
-            maxAge:60*60*24*7, // 1 weak
+            secure:true,maxAge:60*60*24*7,
             path:'/'
         })
-        return data.user;
-
+        return  data.user
     }catch (err) {
         return err;
     }
-
-
-
 })

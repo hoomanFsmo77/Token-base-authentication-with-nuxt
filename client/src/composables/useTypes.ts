@@ -1,17 +1,31 @@
-export interface User_Information {
-    name?:string|null
+export interface Login_Information {
     email:string|null
-    password:number|string|null
-    c_password?:number|string|null
-}
-interface Error_Message {
-    name?:string[]
-    email:string[]
-    password:string[]
-    c_password?:string[]
+    password:string|null
 }
 
-export interface ErrorDebugger {
-    flag:boolean,
-    message:Error_Message|null
+export interface Register_Information extends Login_Information{
+    name:string|null
+    c_password:string|null
+}
+export interface Register_Response{
+    token:string,
+    user:{
+        name:string
+        email:string
+        updated_at:string
+        created_at:string
+        id:number
+    }
+}
+
+export interface Login_Response {
+    token:string,
+    user:{
+        id:number
+        name:string
+        email:string
+        email_verified_at:null
+        created_at:string
+        updated_at:string
+    }
 }

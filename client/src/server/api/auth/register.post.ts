@@ -1,25 +1,25 @@
-import {setCookie} from "h3";
+import {readBody, setCookie} from "h3";
+import {Register_Response} from "~/composables/useTypes";
 
-
-export default defineEventHandler(async (e)=>{
+export default defineEventHandler(async e=>{
+    const {endpoints,cookieName}=useRuntimeConfig()
     const body=await readBody(e)
-    const {baseUrl}=useRuntimeConfig()
     try {
-        const data:any=await $fetch(baseUrl+'/api/register',{
+        const data:Register_Response=await $fetch(endpoints.register,{
             method:'POST',
-            body:body,
+            body,
             headers:{
                 'Accept':'application/json'
             }
         })
-        setCookie(e,'token',data.token,{
-            httpOnly:true,
+        setCookie(e,cookieName,data.token,{
+            path:'/',
+            maxAge:60*60*24*7,
             secure:true,
-            maxAge:60*60*24*7, // 1 weak
-            path:'/'
+            httpOnly:true
         })
-        return  data.user;
-    }catch (error:any) {
-        return  error;
+        return data.user
+    }catch (err) {
+        return err;
     }
 })

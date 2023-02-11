@@ -1,41 +1,39 @@
-import {User_Information,ErrorDebugger} from "~/composables/useTypes";
+import {Login_Information,Login_Response} from "~/composables/useTypes";
 import { useToast } from "vue-toastification";
-
 export const useLogin=()=>{
-    const fetchFlag=ref<boolean>(false)
+    const {endpoints}=useAppConfig()
     const toast = useToast();
-    const userInformation=reactive<User_Information>({
-        password:null,
-        email:null
+    const userData=useState<Login_Response['user']|null>('userInfo',()=>null)
+    const errors=ref<string[]>([])
+    const fetchFlag=useState<boolean>('loginFlag',()=>false)
+    const userInformation=reactive<Login_Information>({
+        email:null,
+        password:null
     })
-    const errorDebugger=reactive<ErrorDebugger>({
-        message:null,
-        flag:false
-    })
+
     const loginHandler = async () => {
         fetchFlag.value=true
-        errorDebugger.flag=false
-        errorDebugger.message=null
         try {
-            const data=await $fetch('/api/auth/login',{
+            const data:Login_Response['user']=await $fetch(endpoints.login,{
                 method:'POST',
                 body:userInformation
             })
             toast.success('You are logged in!')
-            errorDebugger.flag=false
-            errorDebugger.message=null
+            errors.value=[]
+            userData.value=data
             return navigateTo({name:'index'})
         }catch (err:any) {
-            errorDebugger.flag=true
-            errorDebugger.message=err.data.data
+            userData.value=null
+            errors.value=Object.values(err.data.data).flat() as string[]
         }finally {
             fetchFlag.value=false
         }
+
     }
 
 
 
     return{
-        loginHandler,userInformation,errorDebugger,fetchFlag
+        loginHandler,userInformation,fetchFlag,errors
     }
 }

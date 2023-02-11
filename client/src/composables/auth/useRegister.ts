@@ -1,45 +1,46 @@
-import {User_Information,ErrorDebugger} from "~/composables/useTypes";
+import {Register_Information} from "~/composables/useTypes";
+import {Register_Response} from "~/composables/useTypes";
+
 import { useToast } from "vue-toastification";
-export const UseRegister=()=>{
-    const fetchFlag=ref<boolean>(false)
+export const useRegister=()=>{
+    const fetchFlag=useState<boolean>('registerFlag',()=>false)
     const toast = useToast();
-    const errorDebugger=reactive<ErrorDebugger>({
-        message:null,
-        flag:false
-    })
-    const userInformation=reactive<User_Information>({
+    const {endpoints}=useAppConfig()
+    const errors=ref<string[]>([])
+    const userData=useState<Register_Response['user']|null>('userInfo',()=>null)
+    const userInformation=reactive<Register_Information>({
         name:null,
-        c_password:null,
+        email:null,
         password:null,
-        email:null
+        c_password:null
     })
 
-    const registerHandler =async () => {
+
+
+    const registerHandler = async () => {
         fetchFlag.value=true
-        errorDebugger.flag=false
-        errorDebugger.message=null
         try {
-            const data=await $fetch('/api/auth/register',{
+            const user:Register_Response['user']=await $fetch(endpoints.register,{
                 method:'POST',
                 body:userInformation
             })
-            // console.log(data)
             toast.success('You registered!')
-            errorDebugger.flag=false
-            errorDebugger.message=null
+            errors.value=[]
+            userData.value=user
             return navigateTo({name:'index'})
-        }catch (e:any) {
-            errorDebugger.flag=true
-            errorDebugger.message=e.data.data
+        }catch (err:any) {
+            userData.value=null
+            errors.value=Object.values(err.data.data).flat() as string[]
         }finally {
             fetchFlag.value=false
         }
+
     }
 
 
 
 
     return{
-        userInformation,registerHandler,errorDebugger,fetchFlag
+        registerHandler,userInformation,errors,fetchFlag
     }
 }

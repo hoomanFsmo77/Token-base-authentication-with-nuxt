@@ -8,29 +8,32 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <NuxtLink active-class="active" :to="{name:'index'}" class="nav-link " aria-current="page">Home</NuxtLink>
+            <NuxtLink :to="{name:'index'}" active-class="active" class="nav-link " aria-current="page" >Home</NuxtLink>
           </li>
           <li class="nav-item">
-            <NuxtLink :to="{name:'posts'}" active-class="active" class="nav-link" >Posts</NuxtLink>
+            <NuxtLink :to="{name:'posts'}" active-class="active" class="nav-link " aria-current="page" >Posts</NuxtLink>
           </li>
         </ul>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <NuxtLink active-class="active" :to="{name:'profile'}" class="nav-link " aria-current="page">Profile</NuxtLink>
+            <NuxtLink :to="{name:'user-profile'}" active-class="active" class="nav-link " aria-current="page" >Profile</NuxtLink>
           </li>
           <li class="nav-item">
-            <NuxtLink active-class="active" :to="{name:'auth-logout'}" class="nav-link " aria-current="page">Log out</NuxtLink>
+            <NuxtLink :to="{name:'auth-logout'}" active-class="active" class="nav-link " aria-current="page" >Log out</NuxtLink>
           </li>
           <li class="nav-item">
-            <NuxtLink active-class="active" :to="{name:'auth-register'}" class="nav-link " aria-current="page">Register</NuxtLink>
+            <NuxtLink :to="{name:'auth-register'}" active-class="active" class="nav-link " aria-current="page" >Register</NuxtLink>
           </li>
           <li class="nav-item">
-            <NuxtLink active-class="active" :to="{name:'auth-login'}" class="nav-link " aria-current="page">Log in</NuxtLink>
+            <NuxtLink :to="{name:'auth-login'}" active-class="active" class="nav-link " aria-current="page" >Log in</NuxtLink>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+
+
+
 </template>
 
 <script>

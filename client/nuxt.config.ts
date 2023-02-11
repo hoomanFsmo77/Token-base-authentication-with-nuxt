@@ -1,13 +1,15 @@
 
 export default defineNuxtConfig({
     runtimeConfig:{
-      baseUrl:process.env.BASE_URL,
-        public:{
-            baseUrl:process.env.BASE_URL
-        }
+      endpoints:{
+          register:process.env.REGISTER_URL,
+          login:process.env.LOGIN_URL
+      },
+      cookieName:process.env.COOKIE_NAME
+
     },
     build:{
-        transpile:['vue-toastification']
+        transpile:[]
     },
     css:['~/assets/style/App.scss'],
     app:{

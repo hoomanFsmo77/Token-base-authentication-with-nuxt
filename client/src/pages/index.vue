@@ -1,9 +1,13 @@
 <template>
   <div class="container mt-5">
-    <div class="card">
-      <div class="card-body text-center">
-        <h1 class="mb-4">Token base authentication with nuxt3</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolores ducimus fuga maxime neque, nesciunt, nihil perspiciatis placeat praesentium qui quidem quos ratione recusandae, reprehenderit sequi similique suscipit vero voluptatem.</p>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body text-center">
+            <h1 class="mb-2">Token base authentication with nuxt</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, suscipit, voluptas? Accusantium aut dolorum eaque excepturi impedit incidunt ipsam iste laboriosam laborum minima non, praesentium quia totam? Quo, reiciendis, similique?</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
