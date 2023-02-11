@@ -23,7 +23,6 @@ export const useLogin=()=>{
             userData.value=data
             return navigateTo({name:'index'})
         }catch (err:any) {
-            userData.value=null
             errors.value=Object.values(err.data.data).flat() as string[]
         }finally {
             fetchFlag.value=false

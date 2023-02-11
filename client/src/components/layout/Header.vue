@@ -15,18 +15,22 @@
           </li>
         </ul>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <NuxtLink :to="{name:'user-profile'}" active-class="active" class="nav-link " aria-current="page" >Profile</NuxtLink>
-          </li>
-          <li class="nav-item">
-            <NuxtLink :to="{name:'auth-logout'}" active-class="active" class="nav-link " aria-current="page" >Log out</NuxtLink>
-          </li>
-          <li class="nav-item">
-            <NuxtLink :to="{name:'auth-register'}" active-class="active" class="nav-link " aria-current="page" >Register</NuxtLink>
-          </li>
-          <li class="nav-item">
-            <NuxtLink :to="{name:'auth-login'}" active-class="active" class="nav-link " aria-current="page" >Log in</NuxtLink>
-          </li>
+          <template v-if="userData">
+            <li class="nav-item">
+              <NuxtLink :to="{name:'user-profile'}" active-class="active" class="nav-link " aria-current="page" >Profile</NuxtLink>
+            </li>
+            <li class="nav-item">
+              <a @click="logoutHandler" href="#" class="nav-link " aria-current="page" >Log out</a>
+            </li>
+          </template>
+          <template v-else>
+            <li class="nav-item">
+              <NuxtLink :to="{name:'auth-register'}" active-class="active" class="nav-link " aria-current="page" >Register</NuxtLink>
+            </li>
+            <li class="nav-item">
+              <NuxtLink :to="{name:'auth-login'}" active-class="active" class="nav-link " aria-current="page" >Log in</NuxtLink>
+            </li>
+          </template>
         </ul>
       </div>
     </div>
@@ -36,10 +40,10 @@
 
 </template>
 
-<script>
-export default {
-  name: "Header"
-}
+<script setup lang="ts">
+import {Login_Response} from "~/composables/useTypes";
+const {logoutHandler}=useLogout()
+const userData=useState<Login_Response['user']|null>('userInfo',()=>null)
 </script>
 
 <style scoped>

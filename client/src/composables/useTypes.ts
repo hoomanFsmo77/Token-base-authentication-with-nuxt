@@ -29,3 +29,8 @@ export interface Login_Response {
         updated_at:string
     }
 }
+export interface IPosts {
+    id:number,
+    title:string,
+    body:string
+}

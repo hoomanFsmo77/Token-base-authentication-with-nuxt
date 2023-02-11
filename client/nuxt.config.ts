@@ -3,13 +3,16 @@ export default defineNuxtConfig({
     runtimeConfig:{
       endpoints:{
           register:process.env.REGISTER_URL,
-          login:process.env.LOGIN_URL
+          login:process.env.LOGIN_URL,
+          logout:process.env.LOGOUT_URL,
+          me:process.env.ME_URL,
+          posts:process.env.POSTS_URL
       },
       cookieName:process.env.COOKIE_NAME
 
     },
     build:{
-        transpile:[]
+        transpile:['vue-toastification']
     },
     css:['~/assets/style/App.scss'],
     app:{

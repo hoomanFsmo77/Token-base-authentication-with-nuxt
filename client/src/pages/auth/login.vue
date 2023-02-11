@@ -42,6 +42,8 @@
 
 <script setup lang="ts">
 const {loginHandler,userInformation,fetchFlag,errors}=useLogin()
+definePageMeta({middleware:'guest'})
+
 </script>
 
 <style scoped>

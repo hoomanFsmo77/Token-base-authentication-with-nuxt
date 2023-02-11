@@ -49,6 +49,7 @@
 
 <script setup lang="ts">
 const {registerHandler,userInformation,errors,fetchFlag}=useRegister()
+definePageMeta({middleware:'guest'})
 </script>
 
 <style scoped>
